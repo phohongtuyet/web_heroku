@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <div class="container">
+        <% if (messages['error']){ %>
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                <strong>Lỗi !</strong> <%= messages['error'] %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>            </div>
+        <% } %>
+
+        <% if (messages['success']){ %>
+            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                <strong>Thành công !</strong> <%= messages['success'] %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>            </div>
+        <% } %>
+        <div class="container-wrapper">
+
+            <h3 class="login-text"><i class="bi bi-person-circle ac-logo"></i>Đăng nhập</h3>
+        
+            <form method="post">
+                <div class="item"><input class="input" type="text" placeholder="Tên đăng nhập" id="TenDangNhap" name="username" required></div> 
+                <div class="item"><input class="input" type="password" placeholder="Mật khẩu" id="MatKhau" name="password" required> </div>
+
+                <div class="item submit"><button type="submit">Đăng nhập</button></div>
+            </form>
+         
+            
+            <span class="ac">Bạn không có tài khoản? <a href="/register">Đăng ký </a></span>
+        </div>
+
+    </div>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+.container {
+
+    display: flex;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    align-items: center;
+
+}
+
+html {
+    background-color: #4eaad8;
+}
+
+.container-wrapper {
+    padding: 3em;
+    margin: 2em;
+    width: max-content;
+    height: max-content;
+    background-color: #7acaec;
+    border-radius: 30px;
+}
+
+.login-text {
+    text-align: center;
+    font-size: 2em;
+    margin-top: -2%;
+}
+
+.item {
+    padding: 0.2em;
+}
+
+.container-wrapper label,
+button {
+    padding: 0.2em;
+}
+
+.submit {
+    text-align: center;
+   margin-top: 20px;
+}
+
+.submit button {
+    padding: 0.5em 1em 0.5em 1em;
+    border-radius: 4.7em;
+    border: none;
+    width: 100%;
+    background-color: #FD5D5D;
+    font-size: 18px;
+}
+
+.submit button:hover {
+    background-color: #ff3449;
+    cursor: pointer;
+    box-shadow: #b5b6fb;
+
+}
+
+
+
+form {
+    margin: 2em auto 2em auto
+}
+
+.input {
+    padding: 20px;
+    border-radius: 30px;
+    border: none;
+    font-size: 20px;
+    margin: 5px;
+}
+
+.remember {
+    font-size: normal;
+    margin-left: 40%;
+    display: inline-block;
+    margin-top: 17px;
+}
+
+.ac {
+    display: inline-block;
+    font-size: medium;
+    margin-top: 24px;
+    text-align: center;
+}
+
+
+* {
+    font-family: 'Varela Round', sans-serif;
+    color: #3a2d2d;
+}
+
+.ac a {
+    text-decoration: underline;
+    color: #3a2d2d;
+}
+
+.ac-logo {
+    padding: 5px;
+    size: 20px;
+}
+
+#toc {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.social-media {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.container h2 {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #000;
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+}
+
+.container h2 span {
+    background-color: #FF8080;
+    padding: 0 10px;
+}
+
+.social-mediaImg {
+    width: 48px;
+}
+
+@media only screen and (max-width: 500px) {
+
+    .container-wrapper {
+        padding: 2em;
+        margin: 1em;
+    }
+
+    .login-text {
+        font-size: 1.5em;
+    }
+
+    .item {
+        padding: 0.1em;
+        text-align: center;
+    }
+
+    .container-wrapper label,
+    button {
+        padding: 0.1em;
+    }
+
+    .submit {
+        margin-top: 1em;
+        margin-bottom: 2em;
+
+    }
+
+    .submit button {
+        padding: 0.5em 1em;
+        border-radius: 4.7em;
+        font-size: 14px;
+    }
+
+
+
+    form {
+        margin: 1em auto 1em auto
+    }
+
+    .input {
+        padding: 10px;
+        border-radius: 15px;
+        font-size: 15px;
+
+    }
+
+    .remember {
+        font-size: smaller;
+        margin-left: 6em;
+    }
+
+    .ac {
+        font-size: small;
+    }
+
+    #toc {
+        font-size: small;
+    }
+
+    .social-mediaImg {
+        width: 40px;
+    }
+    .container h2 span {
+        font-size: medium;
+    }
+}
+	</style>
+		<%- include("../includes/javascript"); %>
+
+</body>
+
+</html>

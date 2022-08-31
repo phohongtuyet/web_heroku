@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+	<%- include("../includes/head"); %>
+<body>
+
+	<div id="colorlib-page">
+		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+		<aside id="colorlib-aside" role="complementary" class="js-fullheight">
+			<nav id="colorlib-main-menu" role="navigation">
+				<ul>
+					<li class="colorlib-active"><a href="/">Trang chủ</a></li>
+					
+					<% categories.forEach(function(cd){ %>
+						<li><a href="/category/<%= cd.slug %>"><%= cd.name %></a></li>
+			
+					  <% }); %>
+
+					<% if (!isLoggedIn) { %>
+						<li >
+							<a  href="/login"><i class="bi bi-box-arrow-in-right"></i> Đăng nhập</a>
+						</li>
+						<li >
+							<a  href="/register"><i class="bi bi-person-plus-fill"></i> Đăng ký</a>
+						</li>
+					<% } else { %>
+						<% if(user.role == 'admin') { %>
+							<div class="dropdown">
+								<button type="button" class="btn  dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-expanded="false" data-offset="10,20">
+									Quản lý
+								  </button>
+								  <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+									<a class="dropdown-item" href="/admin/category">Chủ đề</a>
+									<a class="dropdown-item" href="/admin/user">Tài khoản </a>
+									<a class="dropdown-item" href="/admin/post"> Bài viết</a>
+									<a class="dropdown-item" href="/admin/post/comment"> Bình luận</a>
+								  </div>
+							</div>
+							
+						<% } %>
+						<div class="dropdown">
+							<button type="button" class="btn dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-expanded="false" data-offset="10,20">
+								<%=  user.full_name  %>							  </button>
+							  <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+								<a class="dropdown-item" href="/post/create">Đăng bài viết </a>
+								<a class="dropdown-item" href="/post/my-post">Bài viết của tôi</a>
+							  </div>
+						</div>
+						
+						<li>
+							<a  href="/logout"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a>
+						</li>
+					<% } %>
+					
+					
+				</ul>
+			</nav>
+
+			<div class="colorlib-footer">
+				<h1 id="colorlib-logo" class="mb-4"><a href="index.html"
+						style="background-image: url(asset/images/bg_1.jpg);">TST <span>New</span></a></h1>
+				
+				<p class="pfooter">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					Copyright &copy;
+					<script>document.write(new Date().getFullYear());</script> bản quyền thuộc về Sơn - Tuyết - Tình <i class="icon-heart" aria-hidden="true"></i>  
+				</p>
+			</div>
+		</aside> <!-- END COLORLIB-ASIDE -->
+		<div id="colorlib-main">
+			<section class="ftco-section ftco-no-pt ftco-no-pb">
+				<div class="container">
+					<div class="row d-flex">
+						<div class="col-xl-8 py-5 px-md-5">
+							<div class="row pt-md-4">
+
+								<% if(posts.length){ %>
+									<% posts.forEach(function(bv){ %>
+										<div class="col-md-12">
+											<div class="blog-entry ftco-animate d-md-flex">
+												<%
+													function firstImage(noiDung) {
+														var regExp = /<img[^>]+src="?([^"\s]+)"?[^>]*\/>/g;
+														var results = regExp.exec(noiDung);
+														var image = './images/noimage.png';
+														if(results) image = results[1];
+														return image;
+													}
+												%>
+												<a href="/post/detail/<%= bv.slug %>" class="img img-2"
+													style="background-image: url(<%- firstImage(bv.content) %>);"></a>
+												<div class="text text-2 pl-md-4">
+													<h3 class="mb-2"><a href="/post/detail/<%= bv.slug %>"><%= bv.title %></a></h3>
+													<div class="meta-wrap">
+														<p class="meta">
+															<span><i class="icon-calendar mr-2"></i><%= bv.createdAt %></span>
+															<span><a href="/post/detail/<%= bv.slug %>"><i
+																		class="icon-folder-o mr-2"></i><%= bv.categoryName %></a></span>
+															<span><i class="icon-eye mr-2"></i><%= bv.view %> Lượt xem</span>
+														</p>
+													</div>
+													<p class="mb-4"><%= bv.summary %></p>
+													<p><a href="/post/detail/<%= bv.slug %>" class="btn-custom">Xem thêm  <span class="ion-ios-arrow-forward"></span></a></p>
+												</div>
+											</div>
+										</div>
+									<% }); %>
+								<% }else{ %>
+									<p>Không có bài viết nào</p>
+								<% } %>
+								
+	
+							
+							</div><!-- END-->
+							
+						</div>
+						<div class="col-xl-4 sidebar ftco-animate bg-light pt-5">
+							<div class="sidebar-box pt-md-4">
+								<form action="/post/search" class="search-form">
+									<div class="form-group">
+										<span class="icon icon-search"></span>
+										<input type="text" class="form-control"
+										name="kw" placeholder="Bạn muốn tìm gì?">
+									</div>
+								</form>
+							</div>
+							<div class="sidebar-box ftco-animate">
+								<h3 class="sidebar-heading">Top 3 bài viết được xem nhiều nhất </h3>
+                  <% bestPost.forEach(function(post){ %>
+                    <%
+													function firstImage(noiDung) {
+														var regExp = /<img[^>]+src="?([^"\s]+)"?[^>]*\/>/g;
+														var results = regExp.exec(noiDung);
+														var image = './images/noimage.png';
+														if(results) image = results[1];
+														return image;
+													}
+										%>
+                    <div class="block-21 mb-4 d-flex">
+                      <a class="blog-img mr-4" style="background-image: url(<%- firstImage(post.content) %>);"></a>
+                      <div class="text">
+                        <h3 class="heading"><a style="-webkit-line-clamp: 3;
+                          -webkit-box-orient: vertical;
+                          overflow: hidden;
+                          display: -webkit-box;" href="/post/detail/<%= post.slug %>"><%= post.title %></a></h3>
+                        <div class="meta">
+                          <div><a href="/category/<%= post.categorySlug %>"><%= post.categoryName %></a></div>
+                          <div>Lượt xem: <%= post.view %></div>
+                          <div><%= post.createdAt %></div>
+                        </div>
+                      </div>
+                    </div>
+                  <% }); %>
+							</div>
+
+						</div><!-- END COL -->
+					</div>
+				</div>
+			</section>
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+
+	<!-- loader -->
+	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+				stroke="#F96D00" />
+		</svg></div>
+
+
+	<%- include("../includes/javascript"); %>
+
+</body>
+
+</html>

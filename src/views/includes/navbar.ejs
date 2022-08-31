@@ -1,0 +1,98 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-info">
+	<div class="container-fluid">
+		
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				
+				<a class="navbar-brand"><i class="bi bi-star"></i> PHT New</a>
+				<% if (!isLoggedIn) { %>
+					<li class="nav-item">
+						<a class="nav-link" href="/login"><i class="bi bi-box-arrow-in-right"></i> Đăng nhập</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/register"><i class="bi bi-person-plus-fill"></i> Đăng ký</a>
+					</li>
+				<% } else { %>
+					<% if(user.role == 'admin') { %>
+						
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="bi bi-gear"></i> Quản lý
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li><a class="dropdown-item" href="/admin/category"><i class="bi bi-card-checklist"></i> Chủ đề</a></li>
+								<li><a class="dropdown-item" href="/admin/user"><i class="bi bi-people"></i> Tài khoản</a></li>
+								<li><hr class="dropdown-divider"></li>
+								<li><a class="dropdown-item" href="/admin/post"><i class="bi bi-file-earmark-richtext"></i> Bài viết</a></li>
+								<li><a class="dropdown-item" href="/admin/post/comment"><i class="bi bi-card-checklist"></i> Bình luận</a></li>
+							</ul>
+						</li>
+					<% } %>
+					
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="bi bi-person"></i> <%= user.full_name %> 
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="/post/create"><i class="bi bi-file-earmark-plus"></i> Đăng bài viết</a></li>
+							<li><a class="dropdown-item" href="/post/my-post"><i class="bi bi-journal-bookmark"></i> Bài viết của tôi</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<!-- <li><a class="dropdown-item" href="/taikhoan/hoso"><i class="bi bi-person-badge"></i> Hồ sơ người dùng</a></li> -->
+						</ul>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a>
+					</li>
+				<% } %>
+				
+				
+			</ul>
+			<form action="/post/search" method="get" class="d-flex">
+				<input class="form-control me-2" type="search" name="kw" placeholder="Bạn muốn tìm gì?">
+				<button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+			</form>
+		</div>
+	</div>
+</nav>
+
+
+
+
+	<!-- <li class="nav-item">
+		<a class="nav-link" href="/login"><i class="bi bi-box-arrow-in-right"></i> Đăng nhập</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="/register"><i class="bi bi-person-plus-fill"></i> Đăng ký</a>
+	</li>
+
+	
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				<i class="bi bi-gear"></i> Quản lý
+			</a>
+			<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<li><a class="dropdown-item" href="/admin/category"><i class="bi bi-card-checklist"></i> Chủ đề</a></li>
+				<li><a class="dropdown-item" href="/taikhoan"><i class="bi bi-people"></i> Tài khoản</a></li>
+				<li><hr class="dropdown-divider"></li>
+				<li><a class="dropdown-item" href="/admin/post"><i class="bi bi-file-earmark-richtext"></i> Bài viết</a></li>
+			</ul>
+		</li>
+	 -->
+	
+	<!-- <li class="nav-item dropdown">
+		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+			<i class="bi bi-person"></i> >
+		</a>
+		<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+			<li><a class="dropdown-item" href="/baiviet/them"><i class="bi bi-file-earmark-plus"></i> Đăng bài viết</a></li>
+			<li><a class="dropdown-item" href="/baiviet/cuatoi"><i class="bi bi-journal-bookmark"></i> Bài viết của tôi</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="/taikhoan/hoso"><i class="bi bi-person-badge"></i> Hồ sơ người dùng</a></li>
+		</ul>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="/dangxuat"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a>
+	</li> -->
