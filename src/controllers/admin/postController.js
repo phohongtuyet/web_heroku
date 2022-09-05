@@ -489,15 +489,37 @@ class PostController {
         try{
             const search = req.query.kw;
             // get posts by search keyword near same
+            const categories = await db.collection("categories").get();
+            const bestPost = await db.collection("posts").orderBy("view", "desc").limit(3).get();
             const posts = await db.collection("posts").where("title", ">=", search).where("title", "<=", search + "\uf8ff").get();
-          
+            const bestPostRef = await Promise.all(bestPost.docs.map(async post => {
+                const postData = post.data();
+
+                const categoryId = postData.categoryId.path.split("/").pop();
+                const userId = postData.userId.path.split("/").pop();
+
+                const category = await db.collection("categories").doc(`${categoryId}`).get();
+                const user = await db.collection("users").doc(`${userId}`).get();
+              
+                //convert createdAt time VietNam to UTC
+                const createdAt = new Date(post.createTime.toDate()).toLocaleString("vi-VN")
+
+                return {
+                    id: post.id,
+                    ...postData,
+                    categoryName: category.data().name,
+                    userName: user.data().full_name,
+                    createdAt: createdAt,
+                    view: post.data().view
+                }
+            }));
             if(posts.empty){
                 const categories = await db.collection("categories").get();
                 
                 res.render("post/search", {
                     posts: [],
                     categories: categories.docs.map(category => category.data()),
-                    bestPost: [],
+                    bestPost: bestPostRef,
                     title: "Tìm kiếm bài viết",
                 })
             }
