@@ -129,32 +129,31 @@
 							</div>
 							<div class="sidebar-box ftco-animate">
 								<h3 class="sidebar-heading">Top 3 bài viết được xem nhiều nhất </h3>
-                  <% bestPost.forEach(function(post){ %>
-                    <%
-													function firstImage(noiDung) {
-														var regExp = /<img[^>]+src="?([^"\s]+)"?[^>]*\/>/g;
-														var results = regExp.exec(noiDung);
-														var image = './images/noimage.png';
-														if(results) image = results[1];
-														return image;
-													}
-										%>
-                    <div class="block-21 mb-4 d-flex">
-                      <a class="blog-img mr-4" style="background-image: url(<%- firstImage(post.content) %>);"></a>
-                      <div class="text">
-                        <h3 class="heading"><a style="-webkit-line-clamp: 3;
-                          -webkit-box-orient: vertical;
-                          overflow: hidden;
-                          display: -webkit-box;" href="/post/detail/<%= post.slug %>"><%= post.title %></a></h3>
-                        <div class="meta">
-                          <div><a href="/category/<%= post.categorySlug %>"><%= post.categoryName %></a></div>
-                          <div>Lượt xem: <%= post.view %></div>
-                          <div><%= post.createdAt %></div>
-                        </div>
-                      </div>
-                    </div>
-                  <% }); %>
-							</div>
+								<% bestPost.forEach(function(post){ %>
+									<%
+																	function firstImage(noiDung) {
+																		var regExp = /<img[^>]+src="?([^"\s]+)"?[^>]*\/>/g;
+																		var results = regExp.exec(noiDung);
+																		var image = './images/noimage.png';
+																		if(results) image = results[1];
+																		return image;
+																	}
+														%>
+									<div class="block-21 mb-4 d-flex">
+									  <a class="blog-img mr-4" style="background-image: url(<%- firstImage(post.content) %>);"></a>
+									  <div class="text">
+										<h3 class="heading"><a style="-webkit-line-clamp: 3;
+										  -webkit-box-orient: vertical;
+										  overflow: hidden;
+										  display: -webkit-box;" href="/post/detail/<%= post.slug %>"><%= post.title %></a></h3>
+										<div class="meta">
+										  <div><a href="/category/<%= post.categorySlug %>"><%= post.categoryName %></a></div>
+										  <div>Lượt xem: <%= post.view %></div>
+										  <div><%= post.createdAt %></div>
+										</div>
+									  </div>
+									</div>
+								  <% }); %>
 
 						</div><!-- END COL -->
 					</div>
